@@ -31,9 +31,9 @@ serviceCollection.AddNosimusAI(configuration);
 4) Use it in any test framework of your choice
 
 ```csharp
-[Test]
 using NosimusAI;
 
+[Test]
 public async Task ShouldPassBusinessRequirement()
 {
     var service = GlobalTestSetup.ServiceProvider!.GetRequiredService<TestRunner>();
