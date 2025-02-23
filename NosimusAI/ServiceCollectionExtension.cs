@@ -17,6 +17,7 @@ public static class ServiceCollectionExtensions
 
         services.AddSingleton<CallgraphExtractor>();
         services.AddSingleton<AITestRunner>();
+        services.AddSingleton<BusinessRequirementExtractor>();
         services.AddSingleton<TestRunner>();
 
         return services;

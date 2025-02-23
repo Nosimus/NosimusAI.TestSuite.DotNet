@@ -1,3 +1,5 @@
+using NosimusAI.Models;
+
 namespace NosimusAI;
 
 public class TestRunner
@@ -15,7 +17,7 @@ public class TestRunner
     public async Task<TestResult> RunTest(string requirement, string @class, string testable, CancellationToken ct = default)
     {
         var pathes = await _callgraphExtractor.Extract(@class, testable, ct);
-        var prompt = PromptBuilder.BuildPrompt(@class + "." + testable, requirement, pathes);
+        var prompt = PromptBuilder.BuildTestPrompt(@class + "." + testable, requirement, pathes);
         var aiTestResult = await _aiTestRunner.RunTest(prompt, ct);
         
         return new TestResult
@@ -29,7 +31,7 @@ public class TestRunner
     public async Task<TestResult> RunTest(string requirement, Type t, string testable, CancellationToken ct = default)
     {
         var pathes = await _callgraphExtractor.Extract(t.FullName!, testable, ct);
-        var prompt = PromptBuilder.BuildPrompt(t.FullName + "." + testable, requirement, pathes);
+        var prompt = PromptBuilder.BuildTestPrompt(t.FullName + "." + testable, requirement, pathes);
         var aiTestResult = await _aiTestRunner.RunTest(prompt, ct);
         
         return new TestResult

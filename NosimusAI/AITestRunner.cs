@@ -1,5 +1,6 @@
 ﻿using System.Text.Json;
 using Microsoft.Extensions.Options;
+using NosimusAI.Models;
 using OpenAI.Chat;
 
 namespace NosimusAI;
@@ -10,7 +11,7 @@ public sealed class AITestRunner
 
     public AITestRunner(IOptions<NosimusSettings> settings)
     {
-        _chatClient = new(model: "gpt-4o", apiKey: settings.Value.OpenAiKey);
+        _chatClient = new(model: settings.Value.OpenAiModel, apiKey: settings.Value.OpenAiKey);
     }
 
     public async Task<TestResult> RunTest(string testPrompt, CancellationToken ct)

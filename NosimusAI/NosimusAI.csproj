@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
 
         <PackageId>NosimusAI.TestSuite</PackageId>
-        <Version>1.0.6</Version>
+        <Version>1.0.7</Version>
         <Authors>Igor Bruev (jaktenstid1@gmail.com)</Authors>
         <Company>NosimusAI</Company>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

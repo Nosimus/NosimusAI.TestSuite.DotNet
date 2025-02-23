@@ -11,4 +11,7 @@ public class NosimusSettings
     
     [Required(ErrorMessage = "Solution path is required", AllowEmptyStrings = false)]
     public string SolutionPath { get; init; }
+
+    [Required(ErrorMessage = "Open AI model is required", AllowEmptyStrings = false)]
+    public string OpenAiModel { get; init; } = "gpt-4o";
 }

@@ -1,8 +1,12 @@
 # NOSIMUS AI FOR .NET
 
-This package allows users to test their code against business requirements. Nosimus AI collects call graph for the specified class and entry point (method) and tests it against given business requirements using GPT.
+This package allows users to 
+- test their code against business requirements using AI
+- generate Gherkin test cases using AI
 
-### How to use
+Under the hood it uses call graph from entry point as a context
+
+### How to setup
 
 1) Install Nosimus AI package and CSharp code analysis packages
 
@@ -18,7 +22,8 @@ dotnet add package Microsoft.CodeAnalysis.CSharp.Workspaces
 {
   "Nosimus": {
     "OpenAiKey": "",
-    "SolutionPath": "Full path to .sln file"
+    "SolutionPath": "Full path to .sln file",
+    "OpenAiModel": "gpt-4o"
   }
 }
 ```
@@ -28,13 +33,14 @@ dotnet add package Microsoft.CodeAnalysis.CSharp.Workspaces
 serviceCollection.AddNosimusAI(configuration);
 ```
 
-4) Use it in any test framework of your choice
+#### How to write a test
 
 ```csharp
 using NosimusAI;
 
 [Test]
 public async Task ShouldPassBusinessRequirement()
+[Test]
 {
     var service = GlobalTestSetup.ServiceProvider!.GetRequiredService<TestRunner>();
     var result = await service.RunTest(
@@ -47,3 +53,11 @@ public async Task ShouldPassBusinessRequirement()
     Assert.That(result.Passed, Is.EqualTo(true));
 }
 ```
+
+#### How to generate Gherkin test case
+
+```csharp
+var generator = serviceProvider.GetRequiredService<BusinessRequirementExtractor>();
+var tests = await generator.GenerateGherkin(typeof(Book), "Borrow", CancellationToken.None);
+```
+

@@ -1,4 +1,4 @@
-namespace NosimusAI;
+namespace NosimusAI.Models;
 
 public record TestResult
 {
