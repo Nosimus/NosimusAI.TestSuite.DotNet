@@ -41,7 +41,6 @@ using NosimusAI;
 
 [Test]
 public async Task ShouldPassBusinessRequirement()
-[Test]
 {
     var service = GlobalTestSetup.ServiceProvider!.GetRequiredService<TestRunner>();
     var result = await service.RunTest(
