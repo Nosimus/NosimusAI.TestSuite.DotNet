@@ -16,8 +16,9 @@ public class TestRunner
     
     public async Task<TestResult> RunTest(string requirement, string @class, string testable, CancellationToken ct = default)
     {
-        var pathes = await _callgraphExtractor.Extract(@class, testable, ct);
-        var prompt = PromptBuilder.BuildTestPrompt(@class + "." + testable, requirement, pathes);
+        var code = await _callgraphExtractor.Extract(@class, testable, ct);
+        
+        var prompt = PromptBuilder.BuildTestPrompt(@class + "." + testable, requirement, code);
         var aiTestResult = await _aiTestRunner.RunTest(prompt, ct);
         
         return new TestResult

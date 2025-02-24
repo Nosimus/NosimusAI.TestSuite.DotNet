@@ -1,3 +1,4 @@
+using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -220,5 +221,19 @@ public sealed class CallgraphExtractor
             pathes.Add(filePath);
             PrintCallGraph(pathes, callee, callGraph, classToFileMap);
         }
+    }
+
+    public string GetAst(IReadOnlyCollection<string> code)
+    {
+        var stringBuilder = new StringBuilder();
+        
+        foreach (var c in code)
+        {
+            var tree = CSharpSyntaxTree.ParseText(c);
+            var root = tree.GetRoot();
+            stringBuilder.Append(root);
+        }
+
+        return stringBuilder.ToString();
     }
 }

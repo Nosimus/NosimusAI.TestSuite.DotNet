@@ -3,6 +3,7 @@
 This package allows users to 
 - test their code against business requirements using AI
 - generate Gherkin test cases using AI
+- generate Gherkin test cases for AspNet controllers
 
 Under the hood it uses call graph from entry point as a context
 
@@ -61,3 +62,10 @@ var generator = serviceProvider.GetRequiredService<BusinessRequirementExtractor>
 var tests = await generator.GenerateGherkin(typeof(Book), "Borrow", CancellationToken.None);
 ```
 
+#### How to generate Gherkin test cases for AspNet controllers
+
+```csharp
+var generator = serviceProvider.GetRequiredService<BusinessRequirementExtractor>();
+var assembly = Assembly.Load(...);
+var tests = await generator.GenerateGherkinForAspNetControllers(assembly, CancellationToken.None);
+```
